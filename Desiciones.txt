@@ -1,0 +1,18 @@
+Desiciones
+
+	se agrega el campo dni a empleado.
+	cuando se solicitan los datos de un empleado se provee su dni.
+
+	se agrega el campo stock a producto.
+	solo existe un codigo producto con una descripcion dada el stock y los precios.
+	el nombre se desglosa en marca y tamaño.
+		ej: playadito 500g
+			playadito 1000g
+		ambas pertenecientes el tipo "yerba"
+
+	tanto para emleados como para productos cuando se pide ej: empleados por tipo, la api recibe las iniciales del tipo.
+
+	Se agrega al cupon el campo descuento indicativo del descuento a aplicar sobre el total de la compra.
+	Y el campo fecha de emision del cupon.
+
+	Se creó la clase item que representa un producto en una compra.
