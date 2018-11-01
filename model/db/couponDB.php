@@ -3,7 +3,7 @@
 /**
 * MODELO EMPLEADO BASE DE DATOS
 */
-class CouponDB extends ModelDB {
+class CouponDB extends ModelPostgreDB {
 
 	private static $instance;
 
