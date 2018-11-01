@@ -10,7 +10,7 @@ abstract class ModelPostgreDB {
 	protected $table;
 
 	private function createConnection() {
-		$this->db = new PDO("pgsql:host=" . HOST . ";dbname=" . DB, USERNAME, PASSWORD);
+		$this->db = new PDO("pgsql:host=" . HOST . ";dbname=d7a8ie0qb7ithr", USERNAME, PASSWORD);
 	}
 
 	private function disconnect() {
