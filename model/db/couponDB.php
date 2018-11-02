@@ -94,8 +94,9 @@ class CouponDB extends ModelPostgreDB {
 		$connection = $this->getConnection();
 		$connection->beginTransaction();
 		try {
-			$query = "INSERT INTO public.coupon (number, used, release_date, discount) VALUES (?, ?, ?, ?)";
+			$query = "INSERT INTO coupon (number, used, release_date, discount) VALUES (?, ?, ?, ?)";
 			$stmt = $connection->prepare($query);
+			echo $coupon->getNumber();
 			$params= array($coupon->getNumber(), $coupon->getused(), $coupon->getReleaseDate(), $coupon->getDiscount());
 			$stmt->execute($params);
 			return $connection->commit();
