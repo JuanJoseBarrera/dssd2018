@@ -96,11 +96,11 @@ class CouponDB extends ModelPostgreDB {
 		try {
 			$query = "INSERT INTO coupon (number, used, release_date, discount) VALUES (?, ?, ?, ?)";
 			$stmt = $connection->prepare($query);
-			echo $coupon->getNumber();
 			$params= array($coupon->getNumber(), $coupon->getused(), $coupon->getReleaseDate(), $coupon->getDiscount());
 			$stmt->execute($params);
 			return $connection->commit();
 		} catch (PDOException $e) {
+			echo "string";
 			$connection->rollBack();
 		}
 		return;
