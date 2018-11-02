@@ -3,7 +3,7 @@ require '../vendor/autoload.php';
 
 require '../model/clases/coupon.php';
 
-require '../model/db/modelDB.php';
+require '../model/db/modelPostgreDB.php';
 require '../model/db/couponDB.php';
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
