@@ -108,7 +108,7 @@ $app->put('/coupon/{number}', function($request, $response, $args) {
 $app->post('/coupon', function($request, $response, $args) {
 	$data = $request->getParsedBody();
 	$number = $data['number'];
-
+echo $number;
 	$coupon = new Coupon('xx', $data['number'], $data['used'], $data['release_date'], $data['discount']);
 	try {
 		$couponDB = CouponDB::getInstance();

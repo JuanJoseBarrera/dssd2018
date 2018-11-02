@@ -100,6 +100,7 @@ class CouponDB extends ModelPostgreDB {
 			$stmt->execute($params);
 			return $connection->commit();
 		} catch (PDOException $e) {
+			echo "string";
 			$connection->rollBack();
 		}
 		return;
