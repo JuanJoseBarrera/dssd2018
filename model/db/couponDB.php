@@ -79,9 +79,10 @@ class CouponDB extends ModelPostgreDB {
 		$connection = $this->getConnection();
 		$connection->beginTransaction();
 		try {
-			$query = "UPDATE coupon c SET c.used = true WHERE c.number = ?";
-			$stmt = $connection->prepare($query);
-			$params = array($number);
+			$query = "UPDATE coupon SET used = true WHERE number = :number";
+			$query->bindValue(":number", $number);
+			//$stmt = $connection->prepare($query);
+			//$params = array($number);
 			$stmt->execute($params);
 
 			return $connection->commit();
