@@ -50,7 +50,7 @@ class CouponDB extends ModelPostgreDB {
 			$coupon = new Coupon($row['id'], $row['number'], $row['used'], $row['release_date'], $row['discount']);
 			return $coupon;
 		};
-		$query = "SELECT c.id, c.number, c.used, c.release_date, c.discount FROM coupon c WHERE c.used = 1";
+		$query = "SELECT c.id, c.number, c.used, c.release_date, c.discount FROM coupon c WHERE c.used = true";
 		$answer = $this->queryList($query, [], $mapper);
 		return $answer;
 	}
@@ -60,7 +60,7 @@ class CouponDB extends ModelPostgreDB {
 			$coupon = new Coupon($row['id'], $row['number'], $row['used'], $row['release_date'], $row['discount']);
 			return $coupon;
 		};
-		$query = "SELECT c.id, c.number, c.used, c.release_date, c.discount FROM coupon c WHERE c.used = 0";
+		$query = "SELECT c.id, c.number, c.used, c.release_date, c.discount FROM coupon c WHERE c.used = false";
 		$answer = $this->queryList($query, [], $mapper);
 		return $answer;
 	}
@@ -100,7 +100,6 @@ class CouponDB extends ModelPostgreDB {
 			$stmt->execute($params);
 			return $connection->commit();
 		} catch (PDOException $e) {
-			echo "string";
 			$connection->rollBack();
 		}
 		return;
