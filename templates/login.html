@@ -1,0 +1,29 @@
+{% extends "layoutIndex.html" %}
+{% block content%}
+<div class="wrapper">
+	{% if message %}
+		<div class="text-center bg-warning">
+			<p> {{ message }} </p>
+		</div>
+	{% endif %}
+	<form class="form-horizontal" method="post" action="./?action=validar">
+		<div class="form-group">
+			<label for="username" class="col-md-4 control-label">Nombre de Usuario</label>
+			<div class="col-md-4">
+				<input id="username" type="text" name="username" class="form-control" required="" placeholder="Nombre de Usuario">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="password" class="col-md-4 control-label">Contrase&ntilde;a</label>
+			<div class="col-md-4">
+				<input id="password" type="password" name="password" class="form-control" required="" placeholder="Contrase&ntilde;a">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-offset-4 col-md-6">
+				<input type="submit" class="btn btn-primary" value="Ingresar">
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}

@@ -1,16 +1,16 @@
 <?php
 
-define("USERNAME", "zimfeacffebqbm");
-define("PASSWORD", "ede9cc4d5b0d126ae147b1aa85022ab4178d4732a954952495022998a7ab973d");
-define("HOST", "ec2-75-101-138-26.compute-1.amazonaws.com");
-define("DB", "d7a8ie0qb7ithr");
+define("USERNAME_PG", "zimfeacffebqbm");
+define("PASSWORD_PG", "ede9cc4d5b0d126ae147b1aa85022ab4178d4732a954952495022998a7ab973d");
+define("HOST_PG", "ec2-75-101-138-26.compute-1.amazonaws.com");
+define("DB_PG", "d7a8ie0qb7ithr");
 
 abstract class ModelPostgreDB {
 	protected $db;
 	protected $table;
 
 	private function createConnection() {
-		$this->db = new PDO("pgsql:host=" . HOST . ";dbname=".DB, USERNAME, PASSWORD);
+		$this->db = new PDO("pgsql:host=" . HOST_PG . ";dbname=".DB_PG, USERNAME_PG, PASSWORD_PG);
 	}
 
 	private function disconnect() {

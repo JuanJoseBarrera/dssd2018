@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Supermercado</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- BOOTSTRAP CSS -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+	<!--JQuery-->
+	<script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+
+	<!-- BOOTSTRAP JS-->
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="jumbotron text-center">
+		<h1>Supermercado</h1>
+		<p>Sistema de compras Online</p>
+		<p><a class="btn btn-primary btn-lg" href="./?action=login"" role="button">Ingresar</a></p>
+	</div>
+	{% block content %}
+	{% endblock %}
+</body>
+</html>

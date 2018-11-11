@@ -1,0 +1,71 @@
+{% extends "layoutBackend.html" %}
+{% block menu %}
+	{% include 'adminMenu.html' %}
+{% endblock %}
+{% block content %}
+	<div class="wrapper">
+		{% if message %}
+			<div class="text-center bg-warning">
+				<p>{{ message }}</p>
+			</div>
+		{% endif %}
+		<h3 class="text-center">Nuevo Usuario</h3>
+		<div class="form-container">
+			<form class="form-horizontal" method="POST" action="./?class=AdministradorController&amp;action=saveUser">
+				<div class="form-group">
+					<label for="name" class="col-md-4 control-label">Nombre</label>
+					<div class="col-md-4">
+						<input type="text" id="name" class="form-control" name="nombre" placeholder="Nombre" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="lastName" class="col-md-4 control-label">Apellido</label>
+					<div class="col-md-4">
+						<input type="text" id="lastName" class="form-control" name="apellido" placeholder="Apellido" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="username" class="col-md-4 control-label">Usuario</label>
+					<div class="col-md-4">
+						<input type="text" id="username" class="form-control" name="username" placeholder="Usuario" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="password" class="col-md-4 control-label">Contrase&ntilde;a</label>
+					<div class="col-md-4">
+						<input type="password" id="password" class="form-control" name="password" placeholder="Contraseña" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="repeatPassword" class="col-md-4 control-label">Repetir Contrase&ntilde;a</label>
+					<div class="col-md-4">
+						<input type="password" id="repeatPassword" class="form-control" name="repeatPassword" placeholder="Repetir Contraseña" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="rol" class="col-md-4 control-label">Rol</label>
+					<div class="col-md-4">
+						<select id="rol" class="form-control" onchange="showNroCliente()" name="rol" required>
+							<option value="" selected>Seleccione un Rol</option>
+							{% for rol in roles %}
+								<option value="{{ rol.id }}">{{ rol.nombre }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div id="nroClienteDiv" class="form-group">
+					<label for="nroCliente" class="col-md-4 control-label">N&uacute;mero de cliente</label>
+					<div class="col-md-4">
+						<input type="number" id="nroCliente" class="form-control" name="nroCliente" placeholder="N&uacute;mero de cliente" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-offset-4 col-md-6">
+						<input type="reset" class="btn btn-default" value="Limpiar Formulario">
+						<input type="submit" class="btn btn-primary" value="Guardar">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

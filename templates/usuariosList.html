@@ -1,0 +1,44 @@
+{% extends "layoutBackend.html" %}
+{% block menu %}
+	{% include 'adminMenu.html' %}
+{% endblock %}
+{% block content %}
+<div class="wrapper">
+	{% if message %}
+		<div class="text-center bg-success">
+			<p>{{ message }}</p>
+		</div>
+	{% endif %}
+	<h3 class="text-center">Usuarios</h3>
+
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th class="encabezado">Nombre</th>
+					<th class="encabezado">Apellido</th>
+					<th class="encabezado">Usuario</th>
+					<th class="encabezado">Fecha de Creaci&oacute;n</th>
+					<th class="encabezado">Rol</th>
+					<th class="encabezado"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for usuario in usuarios %}
+				<tr>
+					<td class="dato">{{ usuario.nombre }}</td>
+					<td class="dato">{{ usuario.apellido }}</td>
+					<td class="dato">{{ usuario.username }}</td>
+					<td class="dato">{{ usuario.fechaAlta }}</td>
+					<td class="dato">{{ usuario.rol.nombre }}</td>
+					<td class="dato">
+						<a href="./?class=AdministradorController&amp;action=editUser&amp;userId={{usuario.id}}" class="glyphicon glyphicon-pencil" title="Editar"></a>
+						<a href="./?class=AdministradorController&amp;action=deleteUser&amp;userId={{usuario.id}}" class="glyphicon glyphicon-trash" onclick="return confirmDelete()" title="Eliminar"></a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+.wrapper {
+	border-color: black solid;
+	border-radius: 5px;
+}
+
+.listado, .encabezado, .dato {
+	border: 2px groove gray;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.parent {
+	margin-bottom: 3%;
+}
