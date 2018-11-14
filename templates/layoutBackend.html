@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Seguros SSA</title>
+	<title>Supermercado</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- CHOSEN -->
+	<link type="text/css" rel="stylesheet" href="css/chosen.min.css">
 	<!-- BOOTSTRAP CSS -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -15,13 +17,22 @@
 	<!-- BOOTSTRAP JS-->
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 
+	<!-- CHOSEN -->
+	<script src="js/chosen.jquery.min.js" type="text/javascript"></script>
+
 	<!-- Funciones JS-->
 	<script src="js/scripts.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(
+			function() {
+				$(".chosen").chosen();
+			});
+	</script>
 </head>
 <body>
 	<div class="jumbotron text-center">
-		<h1>Seguros SSA</h1>
-		<p>Registro de Incidentes Online</p>
+		<h1>Supermercado</h1>
+		<p>Sistema de compras Online</p>
 		<p><a class="btn btn-primary btn-lg" href="./?action=logout" role="button">Cerrar sesi&oacute;n</a></p>
 	</div>
 	{% block menu %}

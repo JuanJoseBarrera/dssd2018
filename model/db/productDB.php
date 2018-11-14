@@ -86,4 +86,14 @@ class ProductDB extends ModelDB {
 	* Elimina logicamente un producto
 	*/
 	public function delete() {}
+
+	public function getProductTypes() {
+		$mapper = function($row) {
+ 			$type = new ProductType($row['id'], $row['initials'], $row['description']);
+			return $type;
+		};
+		$query = "SELECT t.id, t.initials, t.description FROM producttype t";
+		$answer = $this->queryList($query, [], $mapper);
+		return $answer;
+	}
 }

@@ -7,11 +7,13 @@ error_reporting(-1);
 /** CONTROLADORES **/
 require_once './controllers/indexController.php';
 require_once './controllers/loginController.php';
+require_once './controllers/userController.php';
 
 /** CLASES MODELO**/
 require_once './model/clases/coupon.php';
 require_once './model/clases/employee.php';
 require_once './model/clases/product.php';
+require_once './model/clases/productType.php';
 require_once './model/clases/user.php';
 
 /** MODELO CONSULTAS**/
@@ -29,6 +31,7 @@ require_once './views/loginView.php';
 require_once './views/backendAdminView.php';
 require_once './views/backendManagerView.php';
 require_once './views/backendUserView.php';
+require_once './views/selectTypeView.php';
 
 
 session_start();
@@ -44,11 +47,15 @@ try {
 	elseif (isset($_GET["action"]) && $_GET["action"] == 'validar') {
 		LoginController::getInstance()->validar();
 	}
-/*
-	elseif (isset($_GET["action"]) && ($_GET["action"] == 'PacienteLoad') && (PermisosController::getInstance()->isGranted($_SESSION['id'], "paciente_new"))) {
-		PacienteController::getInstance()->PacienteLoad();
+	elseif (isset($_GET["action"]) && $_GET["action"] == 'indexUser') {
+		UserController::getInstance()->index();
 	}
 
+	elseif (isset($_GET["action"]) && ($_GET["action"] == 'elegirTipo')) {
+		UserController::getInstance()->elegirTipo();
+	}
+
+/*
 	elseif (isset($_GET["action"]) && ($_GET["action"] == 'AltaPaciente') && (PermisosController::getInstance()->isGranted($_SESSION['id'], "paciente_new"))) {
 		PacienteController::getInstance()->AltaPaciente();
 	}
