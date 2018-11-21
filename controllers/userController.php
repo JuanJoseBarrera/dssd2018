@@ -26,4 +26,13 @@ class UserController {
 		$view = new SelectTypeView();
 		$view->show($tipos, $message);
 	}
+
+	/** Obtener el listado de productos por tipo de la api de bonita**/
+	private function getProducts($type) {
+		$curl = curl_init(BONITA_BASE_URL.$type);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		$res = curl_exec($curl);
+		$result = json_decode($res, true);
+		return $result;
+	}
 }
