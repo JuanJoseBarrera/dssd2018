@@ -42,7 +42,10 @@ class EmployeeDB extends ModelDB {
 		};
 		$query = "SELECT e.id, e.dni, e.firstname, e.surname, e.email, e.password, t.description as type FROM employee e JOIN employeetype t ON e.employeetype = t.id WHERE e.dni = ?";
 		$answer = $this->queryList($query, [$dni], $mapper);
-		return $answer[0];
+		if (count($answer)>0) {
+			return $answer[0];
+		}
+		return $answer;
 	}
 
 	public function getEmployeesByType($type) {

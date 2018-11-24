@@ -3,8 +3,7 @@
 	{% include 'userMenu.html' %}
 {% endblock %}
 {% block content %}
-	<form class="form-horizontal" method="POST" action="./?action=saveSale">
-		<!-- input type="hidden" name="form_token" value="{{ token }}" -->
+	<form class="form-horizontal" method="POST" action="./?action=listProducts">
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="productType">Tipo de Producto</label>
 			<div class="col-md-4">

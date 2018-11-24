@@ -11,6 +11,7 @@ require_once './configs/configs.php';
 require_once './controllers/indexController.php';
 require_once './controllers/loginController.php';
 require_once './controllers/userController.php';
+require_once './controllers/errorController.php';
 
 /** CLASES MODELO**/
 require_once './model/clases/coupon.php';
@@ -34,7 +35,9 @@ require_once './views/loginView.php';
 require_once './views/backendAdminView.php';
 require_once './views/backendManagerView.php';
 require_once './views/backendUserView.php';
+require_once './views/productsListView.php';
 require_once './views/selectTypeView.php';
+require_once './views/errorView.php';
 
 
 session_start();
@@ -58,6 +61,13 @@ try {
 		UserController::getInstance()->elegirTipo();
 	}
 
+	elseif (isset($_GET["action"]) && ($_GET["action"] == 'listProducts')) {
+		UserController::getInstance()->listProducts();
+	}
+	elseif (isset($_GET["action"]) && ($_GET["action"] == 'buyItem')) {
+		$id = filter_input(INPUT_GET, "productId");
+		UserController::getInstance()->buyItem($id);
+	}
 /*
 	elseif (isset($_GET["action"]) && ($_GET["action"] == 'AltaPaciente') && (PermisosController::getInstance()->isGranted($_SESSION['id'], "paciente_new"))) {
 		PacienteController::getInstance()->AltaPaciente();

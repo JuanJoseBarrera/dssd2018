@@ -1,0 +1,38 @@
+{% extends "layoutBackend.html" %}
+{% block menu %}
+	{% include 'userMenu.html' %}
+{% endblock %}
+{% block content %}
+	<div class="wrapper">
+		{% if message %}
+			<div class="text-center bg-danger"><p>{{ message }}</p></div>
+		{% endif %}
+		<h3 class="text-center">Productos</h3>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th class="encabezado">Marca</th>
+						<th class="encabezado">Temaño</th>
+						<th class="encabezado">Precio de costo</th>
+						<th class="encabezado">precio de venta</th>
+						<th class="encabezado">Tipo</th>
+						<th class="encabezado"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for product in products %}
+						<tr>
+							<td class="dato">{{ product.brand }}</td>
+							<td class="dato">{{ product.size }}</td>
+							<td class="dato">{{ product.costprice }}</td>
+							<td class="dato">{{ product.saleprice }}</td>
+							<td class="dato">{{ product.type }}</td>
+							<td class="dato"><a href="./?action=buyItem&amp;productId={{product.id}}" class="glyphicon glyphicon-pencil" title="Comprar"></a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

@@ -50,7 +50,7 @@ $app->get('/employees/{dni}', function ($request, $response, $args) {
 	if ($employee) {
 		return $response->withJson(object_encode($employee), 200);
 	} else {
-		return $response->withJson(array("No existe un empleado con el dni ingresado"));
+		return $response->withJson(NULL);
 	}
 });
 /**
@@ -111,6 +111,6 @@ $app->post('/employees/{dni}/name/{name}/lastname/{lastname}/email/{email}/passw
 * convierte un object en un array asociativo
 */
 function object_encode($employee) {
-	return array('id' => $employee->getId(), 'firstname' => $employee->getFirstName(), 'surname' => $employee->getSurName(), 'email' => $employee->getEmail(), 'password' => $employee->getPassword(), 'type' => $employee->getType());
+	return array('id' => $employee->getId(), 'dni' => $employee->getDni(), 'firstname' => $employee->getFirstName(), 'surname' => $employee->getSurName(), 'email' => $employee->getEmail(), 'password' => $employee->getPassword(), 'type' => $employee->getType());
 }
 $app->run();

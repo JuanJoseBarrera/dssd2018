@@ -27,6 +27,15 @@ class UserController {
 		$view->show($tipos, $message);
 	}
 
+	public function listProducts() {
+		$type = filter_input(INPUT_POST, "productType");
+		$products = ProductDB::getInstance()->getProductsByType($type);
+		$view = new ProductsListView();
+		$view->show($products);
+	}
+
+	public function buyItem($id) {}
+
 	/** Obtener el listado de productos por tipo de la api de bonita**/
 	private function getProducts($type) {
 		$curl = curl_init(BONITA_BASE_URL.$type);
