@@ -40,7 +40,7 @@ $app->get('/products', function ($request, $response, $args) {
 });
 
 /**
-* A partir del dni obtiene los datos de un empleado
+* A partir del id obtiene los datos de un producto
 */
 $app->get('/products/{id}', function ($request, $response, $args) {
 	$id = $args['id'];
@@ -66,6 +66,32 @@ $app->get('/productsByType/{type}', function ($request, $response, $args) {
 		return $response->withJson($prods, 200);
 	} else {
 		return $response->withJson(array("No hay productos para el tipo ingresado"));
+	}
+});
+
+/**
+*Obtiene el precio de costo de un producto
+*/
+$app->get('/productPrice/{id}', function ($request, $response, $args) {
+	$id = $args['id'];
+	$product = ProductDB::getInstance()->getFullProduct($id);
+	if (count($product > 0)) {
+		return $response->withJson($product[0]->getCostPrice(), 200);
+	} else {
+		return $response->withJson(array("No existe un producto con el id ingresado"));
+	}
+});
+
+/**
+*Obtiene el precio de costo de un producto
+*/
+$app->get('/productSalePrice/{id}', function ($request, $response, $args) {
+	$id = $args['id'];
+	$product = ProductDB::getInstance()->getFullProduct($id);
+	if (count($product > 0)) {
+		return $response->withJson($product[0]->getSalePrice(), 200);
+	} else {
+		return $response->withJson(array("No existe un producto con el id ingresado"));
 	}
 });
 
