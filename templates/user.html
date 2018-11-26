@@ -3,4 +3,14 @@
 	{% include 'userMenu.html' %}
 {% endblock %}
 {% block content %}
+	{% if message %}
+		<div class="text-center bg-info">
+			<p> {{ message }} </p>
+		</div>
+	{% endif %}
+	{% if error %}
+		<div class="text-center bg-danger">
+			<p> {{ error }} </p>
+		</div>
+	{% endif %}
 {% endblock %}

@@ -37,30 +37,20 @@ class LoginController {
 		$password = filter_input(INPUT_POST, "password");
 		$user = UserDB::getInstance()->get($usuario, $password);
 		if (!empty($user)) {
-			/*if ($user->getActivo()) {
-			}*/
-				//$session_token = md5(uniqid(microtime(), true));
-				//$isAdmin = $this->isAdmin($roles);
-				/*if($sitioHabilitado) {
-					$_SESSION['username'] = $user->getUsername();
-					$_SESSION['id'] = $user->getId();
-					//$_SESSION['session_token'] = $session_token;
-					$view = new backendView();
-					$view->show($roles, $user->getUsername());
-				}*/
-				if ($user->getRol() == "Admin") {
-					$_SESSION['username'] = $user->getUsername();
-					$_SESSION['id'] = $user->getId();
-					//$_SESSION['session_token'] = $session_token;
-					$view = new BackendAdminView();
-					$view->show();
-				} elseif ($user->getRol() == "Jerarquico") {
-					$view = new BackendManagerView();
-					$view->show();
-				} else {
-					$view = new BackendUserView();
-					$view->show();
-				}
+			$_SESSION['username'] = $user->getUsername();
+			$_SESSION['id'] = $user->getId();
+			$_SESSION['dni'] = $user->getDni();
+			if ($user->getRol() == "Admin") {
+				$view = new BackendAdminView();
+				$view->show();
+			} elseif ($user->getRol() == "Jerarquico") {
+				$view = new BackendManagerView();
+				$view->show();
+			} else {
+				$_SESSION['controller'] = 'UserController';
+				$view = new BackendUserView();
+				$view->show();
+			}
 		} else {
 			$mensaje = "Acceso Incorrecto. Intente nuevamente.";
 			$view = new LoginView();
