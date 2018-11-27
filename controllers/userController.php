@@ -108,7 +108,7 @@ class UserController {
 		*/
 
 		$caseId = json_decode($info)->id;
-		//echo $caseId;
+		echo $caseId;
 
 		$response = array();
 		$request = $client->request('PUT', 'API/bpm/caseVariable/'.$caseId.'/dniUsuario',
@@ -124,6 +124,19 @@ class UserController {
 		$response['success'] = true;
 		$datos = $response['data'] = json_decode($datos);
 		//echo $datos;
+
+		$request = $client->request('PUT', 'API/bpm/caseVariable/'.$caseId.'/productoIngresado',
+			['headers' => [
+				'X-Bonita-API-Token' => $token->getValue()
+			],
+			'json' => [
+				'type' => 'java.lang.String',
+				'value'=> $id
+			]
+		]);
+		$datos = $request->getBody();
+		$response['success'] = true;
+		$datos = $response['data'] = json_decode($datos);
 
 		/*
 		*/
