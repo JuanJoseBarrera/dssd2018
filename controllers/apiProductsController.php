@@ -76,7 +76,8 @@ $app->get('/productPrice/{id}', function ($request, $response, $args) {
 	$id = $args['id'];
 	$product = ProductDB::getInstance()->getFullProduct($id);
 	if (count($product > 0)) {
-		return $response->withJson($product[0]->getCostPrice(), 200);
+		$result= array('price'=>$product[0]->getCostPrice());
+		return $response->withJson($result, 200);
 	} else {
 		return $response->withJson(array("No existe un producto con el id ingresado"));
 	}
