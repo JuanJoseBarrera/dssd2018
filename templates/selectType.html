@@ -3,6 +3,9 @@
 	{% include 'userMenu.html' %}
 {% endblock %}
 {% block content %}
+	{% if message %}
+		<div class="text-center bg-info"><p>{{ message }}</p></div>
+	{% endif %}
 	<form class="form-horizontal" method="POST" action="./?action=listProducts">
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="productType">Tipo de Producto</label>

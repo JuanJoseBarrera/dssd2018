@@ -1,0 +1,37 @@
+{% extends "layoutBackend.html" %}
+{% block menu %}
+	{% include 'userMenu.html' %}
+{% endblock %}
+{% block content %}
+	<div class="wrapper">
+		{% if message %}
+			<div class="text-center bg-warning">
+				<p>{{ message }}</p>
+			</div>
+		{% endif %}
+		<h3 class="text-center">Nueva Compra</h3>
+		<div class="form-container">
+			<form class="form-horizontal" method="POST" action="./?action=buyItem">
+				<input type="hidden" name="idProduct" value="{{idProduct}}">
+				<div class="form-group">
+					<label for="cantidad" class="col-md-4 control-label">Cantidad</label>
+					<div class="col-md-4">
+						<input type="number" id="cantidad" class="form-control" min="1" value="1" name="cantidad" placeholder="Cantidad" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="cupon" class="col-md-4 control-label">Cup&oacute;n</label>
+					<div class="col-md-4">
+						<input type="number" id="cupon" class="form-control" min="0" name="cupon" placeholder="Cup&oacute;n">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-offset-4 col-md-6">
+						<input type="reset" class="btn btn-default" value="Limpiar Formulario">
+						<input type="submit" class="btn btn-primary" value="Comprar">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

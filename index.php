@@ -36,9 +36,9 @@ require_once './views/backendAdminView.php';
 require_once './views/backendManagerView.php';
 require_once './views/backendUserView.php';
 require_once './views/productsListView.php';
+require_once './views/quantityCouponView.php';
 require_once './views/selectTypeView.php';
 require_once './views/errorView.php';
-
 
 session_start();
 try {
@@ -53,20 +53,26 @@ try {
 	elseif (isset($_GET["action"]) && $_GET["action"] == 'validar') {
 		LoginController::getInstance()->validar();
 	}
-	elseif (isset($_GET["action"]) && $_GET["action"] == 'indexUser') {
+	elseif (isset($_GET["action"]) && $_GET["action"] == 'indexUser' && (UserController::getInstance()->getPermisos())) {
 		UserController::getInstance()->index();
 	}
 
-	elseif (isset($_GET["action"]) && ($_GET["action"] == 'elegirTipo')) {
+	elseif (isset($_GET["action"]) && ($_GET["action"] == 'elegirTipo') && (UserController::getInstance()->getPermisos())) {
 		UserController::getInstance()->elegirTipo();
 	}
 
-	elseif (isset($_GET["action"]) && ($_GET["action"] == 'listProducts')) {
+	elseif (isset($_GET["action"]) && ($_GET["action"] == 'listProducts') && (UserController::getInstance()->getPermisos())) {
 		UserController::getInstance()->listProducts();
 	}
-	elseif (isset($_GET["action"]) && ($_GET["action"] == 'buyItem')) {
+	elseif (isset($_GET["action"]) && ($_GET["action"] == 'selectQuantityAndCoupon') && (UserController::getInstance()->getPermisos())) {
 		$id = filter_input(INPUT_GET, "productId");
-		UserController::getInstance()->buyItem($id);
+		UserController::getInstance()->selectQuantityAndCoupon($id);
+	}
+	elseif (isset($_GET["action"]) && ($_GET["action"] == 'buyItem') && (UserController::getInstance()->getPermisos())) {
+		$id = filter_input(INPUT_POST, "idProduct");
+		$cant = filter_input(INPUT_POST, "cantidad");
+		$cupon = filter_input(INPUT_POST, "cupon");
+		UserController::getInstance()->buyItem($id, $cant, $cupon);
 	}
 	else {
 			IndexController::getInstance()->index();

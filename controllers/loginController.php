@@ -40,6 +40,7 @@ class LoginController {
 			$_SESSION['username'] = $user->getUsername();
 			$_SESSION['id'] = $user->getId();
 			$_SESSION['dni'] = $user->getDni();
+			$_SESSION['rol'] = $user->getRol();
 			if ($user->getRol() == "Admin") {
 				$view = new BackendAdminView();
 				$view->show();

@@ -23,6 +23,15 @@ class UserController {
 
 	private function __construct() {}
 
+	public function getPermisos() {
+		if (isset($_SESSION['rol'])) {
+			$rol = $_SESSION['rol'];
+			return (!strcmp($rol, 'Cliente'));
+		} else {
+			return false;
+		}
+	}
+
 	public function index($message=NULL) {
 		$view = new BackendUserView();
 		$view->show(NULL, $message);
@@ -42,7 +51,13 @@ class UserController {
 		$view->show($products);
 	}
 
-	public function buyItem($id) {
+	public function selectQuantityAndCoupon($idProduct) {
+		$view = new QuantityCouponView();
+		$view->show($idProduct);
+	}
+
+
+	public function buyItem($id, $cant, $cupon) {
 
 		$dni = $_SESSION['dni']; //dni del usuario loguedo que realiza la compra de un producto
 
@@ -67,11 +82,6 @@ class UserController {
 		$code = $response->getStatusCode(); // 200
 		$reason = $response->getReasonPhrase(); // OK
 
-		/*
-		echo "estado de login </br>";
-		var_dump($code);
-		*/
-
 		//obtengo la cookie y me la quedo en una variable
 		$token = $cookieJar->getCookieByName('X-Bonita-API-Token');
 		//var_dump($token->getValue());
@@ -82,14 +92,8 @@ class UserController {
 				'X-Bonita-API-Token' => $token->getValue() //se debe pasar la api de bonita en el header para que tenga efecto el request
 			]]);
 		$info =$response->getBody();
-		/*
-		echo "<br/>";
-		echo "Listado de procesos disponibles </br>";
-		echo ($info);  // muestra mensaje de advertencia de php pero no es error
-		*/
 
 		$processId = json_decode($info)[0]->id; //me guardo el id del proceso
-		//echo $processId;
 
 		$response = $client->request('POST', 'API/bpm/case',
 			['json'=>[
@@ -101,11 +105,6 @@ class UserController {
 		]);
 
 		$info =$response->getBody();
-		/*
-		echo "<br/>";
-		echo "caso creado </br>";
-		echo ($info);
-		*/
 
 		$caseId = json_decode($info)->id;
 		echo $caseId;
@@ -138,6 +137,31 @@ class UserController {
 		$response['success'] = true;
 		$datos = $response['data'] = json_decode($datos);
 
+		$request = $client->request('PUT', 'API/bpm/caseVariable/'.$caseId.'/cantidad',
+			['headers' => [
+				'X-Bonita-API-Token' => $token->getValue()
+			],
+			'json' => [
+				'type' => 'java.lang.Integer',
+				'value'=> $cant
+			]
+		]);
+		$datos = $request->getBody();
+		$response['success'] = true;
+		$datos = $response['data'] = json_decode($datos);
+
+		$request = $client->request('PUT', 'API/bpm/caseVariable/'.$caseId.'/cupon',
+			['headers' => [
+				'X-Bonita-API-Token' => $token->getValue()
+			],
+			'json' => [
+				'type' => 'java.lang.Integer',
+				'value'=> $cupon
+			]
+		]);
+		$datos = $request->getBody();
+		$response['success'] = true;
+		$datos = $response['data'] = json_decode($datos);
 		/*
 		*/
 		$tipos = ProductDB::getInstance()->getProductTypes();
@@ -145,12 +169,4 @@ class UserController {
 		$view->show($tipos, "compra realizada");
 	}
 
-	/** Obtener el listado de productos por tipo de la api de bonita**/
-	private function getProducts($type) {
-		$curl = curl_init(BONITA_BASE_URL.$type);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		$res = curl_exec($curl);
-		$result = json_decode($res, true);
-		return $result;
-	}
 }
