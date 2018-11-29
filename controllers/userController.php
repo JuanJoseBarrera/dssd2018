@@ -107,7 +107,7 @@ class UserController {
 		$info =$response->getBody();
 
 		$caseId = json_decode($info)->id;
-		echo $caseId;
+		//echo $caseId;
 
 		$response = array();
 		$request = $client->request('PUT', 'API/bpm/caseVariable/'.$caseId.'/dniUsuario',
@@ -162,8 +162,7 @@ class UserController {
 		$datos = $request->getBody();
 		$response['success'] = true;
 		$datos = $response['data'] = json_decode($datos);
-		/*
-		*/
+
 		$tipos = ProductDB::getInstance()->getProductTypes();
 		$view = new SelectTypeView();
 		$view->show($tipos, "compra realizada");
