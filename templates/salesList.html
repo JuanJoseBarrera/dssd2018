@@ -1,0 +1,32 @@
+{% extends "layoutBackend.html" %}
+{% block menu %}
+	{% include 'userMenu.html' %}
+{% endblock %}
+{% block content %}
+	<div class="wrapper">
+		{% if message %}
+			<div class="text-center bg-danger"><p>{{ message }}</p></div>
+		{% endif %}
+		<h3 class="text-center">Compras</h3>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th class="encabezado">Producto</th>
+						<th class="encabezado">Precio</th>
+						<th class="encabezado">Cantidad</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for venta in ventas %}
+						<tr>
+							<td class="dato">{{ venta.product }}</td>
+							<td class="dato">{{ venta.price }}</td>
+							<td class="dato">{{ venta.cant }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

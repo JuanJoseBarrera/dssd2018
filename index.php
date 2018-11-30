@@ -19,6 +19,7 @@ require_once './model/clases/employee.php';
 require_once './model/clases/product.php';
 require_once './model/clases/productType.php';
 require_once './model/clases/user.php';
+require_once './model/clases/sale.php';
 
 /** MODELO CONSULTAS**/
 require_once './model/db/modelDB.php';
@@ -27,6 +28,7 @@ require_once './model/db/couponDB.php';
 require_once './model/db/employeeDB.php';
 require_once './model/db/productDB.php';
 require_once './model/db/userDB.php';
+require_once './model/db/saleDB.php';
 
 /** VISTAS **/
 include_once './views/twig.php';
@@ -37,6 +39,7 @@ require_once './views/backendManagerView.php';
 require_once './views/backendUserView.php';
 require_once './views/productsListView.php';
 require_once './views/quantityCouponView.php';
+require_once './views/salesListView.php';
 require_once './views/selectTypeView.php';
 require_once './views/errorView.php';
 
@@ -73,6 +76,9 @@ try {
 		$cant = filter_input(INPUT_POST, "cantidad");
 		$cupon = filter_input(INPUT_POST, "cupon");
 		UserController::getInstance()->buyItem($id, $cant, $cupon);
+	}
+	elseif (isset($_GET["action"]) && ($_GET["action"] == 'compras') && (UserController::getInstance()->getPermisos())) {
+		UserController::getInstance()->compras();
 	}
 	else {
 			IndexController::getInstance()->index();

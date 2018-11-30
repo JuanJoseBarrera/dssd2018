@@ -168,4 +168,10 @@ class UserController {
 		$view->show($tipos, "compra realizada");
 	}
 
+	public function compras() {
+		$dni = $_SESSION['dni'];
+		$sales = SaleDB::getInstance()->getSales($dni);
+		$view = new SaleslistView();
+		$view->show($sales);
+}
 }
