@@ -39,7 +39,8 @@ class LoginController {
 		if (!empty($user)) {
 			$_SESSION['username'] = $user->getUsername();
 			$_SESSION['id'] = $user->getId();
-			$_SESSION['dni'] = $user->getDni();
+			$dni = $user->getDni();
+			$_SESSION['dni'] = $dni;
 			$_SESSION['rol'] = $user->getRol();
 			if ($user->getRol() == "Admin") {
 				$view = new BackendAdminView();
@@ -49,8 +50,9 @@ class LoginController {
 				$view->show();
 			} else {
 				$_SESSION['controller'] = 'UserController';
-				$view = new BackendUserView();
-				$view->show();
+				$employee = UserDB::getInstance()->isEmployee($dni);
+				$_SESSION['employee'] = $employee;
+				UserController::getInstance()->index();
 			}
 		} else {
 			$mensaje = "Acceso Incorrecto. Intente nuevamente.";

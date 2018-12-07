@@ -21,4 +21,13 @@ class UserDB extends ModelDB {
 		$answer = $this->queryList($query, [$usuario, $password], $mapper);
 		return $answer[0];
 	}
+
+	public function isEmployee($dni) {
+		$mapper= function($row) {
+			return $row['cant'];
+		};
+		$query = "SELECT COUNT(*) AS cant FROM employee e JOIN employeetype et ON e.employeetype = et.id WHERE e.dni = ?";
+		$answer = $this->queryList($query, [$dni], $mapper);
+		return $answer[0] > 0;
+	}
 }

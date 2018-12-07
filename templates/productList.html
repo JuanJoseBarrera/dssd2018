@@ -14,7 +14,9 @@
 					<tr>
 						<th class="encabezado">Marca</th>
 						<th class="encabezado">Temaño</th>
+						{% if employee %}
 						<th class="encabezado">Precio de costo</th>
+						{% endif%}
 						<th class="encabezado">precio de venta</th>
 						<th class="encabezado">Tipo</th>
 						<th class="encabezado"></th>
@@ -25,7 +27,9 @@
 						<tr>
 							<td class="dato">{{ product.brand }}</td>
 							<td class="dato">{{ product.size }}</td>
+							{% if employee %}
 							<td class="dato">{{ product.costprice }}</td>
+							{% endif%}
 							<td class="dato">{{ product.saleprice }}</td>
 							<td class="dato">{{ product.type }}</td>
 							<td class="dato"><a href="./?action=selectQuantityAndCoupon&amp;productId={{product.id}}" class="glyphicon glyphicon-pencil" title="Comprar"></a></td>

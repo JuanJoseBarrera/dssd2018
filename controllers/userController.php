@@ -33,8 +33,10 @@ class UserController {
 	}
 
 	public function index($message=NULL) {
+		$products = ProductDB::getInstance()->getProducts();
+		$employee = $_SESSION['employee'];
 		$view = new BackendUserView();
-		$view->show(NULL, $message);
+		$view->show($products, $employee, NULL, $message);
 	}
 
 	public function elegirTipo() {
@@ -47,13 +49,15 @@ class UserController {
 	public function listProducts() {
 		$type = filter_input(INPUT_POST, "productType");
 		$products = ProductDB::getInstance()->getProductsByType($type);
+		$employee = $_SESSION['employee'];
 		$view = new ProductsListView();
-		$view->show($products);
+		$view->show($products, $employee);
 	}
 
 	public function selectQuantityAndCoupon($idProduct) {
+		$employee = $_SESSION['employee'];
 		$view = new QuantityCouponView();
-		$view->show($idProduct);
+		$view->show($idProduct, $employee);
 	}
 
 

@@ -13,4 +13,31 @@
 			<p> {{ error }} </p>
 		</div>
 	{% endif %}
+	<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th class="encabezado">Marca</th>
+						<th class="encabezado">Temaño</th>
+						{% if employee %}
+						<th class="encabezado">Precio de costo</th>
+						{% endif%}
+						<th class="encabezado">precio de venta</th>
+						<th class="encabezado">Tipo</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for product in products %}
+						<tr>
+							<td class="dato">{{ product.brand }}</td>
+							<td class="dato">{{ product.size }}</td>
+							{% if employee %}
+							<td class="dato">{{ product.costprice }}</td>
+							{% endif%}
+							<td class="dato">{{ product.saleprice }}</td>
+							<td class="dato">{{ product.type }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 {% endblock %}

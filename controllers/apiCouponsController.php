@@ -98,7 +98,7 @@ $app->put('/coupon/{number}', function($request, $response, $args) {
 	$number = $args['number'];
 	$coupon = CouponDB::getInstance()->markCouponUsed($number);
 	if ($coupon) {
-		return $response->withJson("El cupon con numero $number fue utilizado con exito!!!");
+		return $response->withJson(array("message" => "El cupon con numero $number fue utilizado con exito!!!"));
 	} else {
 		return $response->withJson(array("No se puede utilizar el cupon con el numero $number"));
 	}

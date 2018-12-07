@@ -86,7 +86,6 @@ try {
 } catch (Exception $e) {
 		if (isset($_SESSION['controller'])) {
 			$controller = $_SESSION['controller'];
-			//echo $controller;
 			$controller::getInstance()->index("Ha ocurrido un error, vuelva a intentar en otro momento");
 		} else {
 	ErrorController::getInstance()->index("Ha ocurrido un error, vuelva a intentar en otro momento");
