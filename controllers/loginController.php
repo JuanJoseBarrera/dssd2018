@@ -46,6 +46,7 @@ class LoginController {
 				$view = new BackendAdminView();
 				$view->show();
 			} elseif ($user->getRol() == "Jerarquico") {
+				$_SESSION['controller'] = 'ManagerController';
 				$view = new BackendManagerView();
 				$view->show();
 			} else {

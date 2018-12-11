@@ -1,0 +1,30 @@
+{% extends "layoutBackend.html" %}
+{% block menu %}
+	{% include 'managerMenu.html' %}
+{% endblock %}
+{% block content %}
+	{% if message %}
+		<div class="text-center bg-info"><p>{{ message }}</p></div>
+	{% endif %}
+	<section>
+		<article>
+			<h3>Productos vendidos</h3>
+			<div class="form-container">
+				<div class="form-inline">
+					<div class="form-group">
+						<label class="" for="fechaInicio">Fecha de Inicio</label>
+						<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" placeholder="yyyy-mm-dd" pattern="yyyy-mm-dd" required>
+					</div>
+					<div class="form-group">
+						<label class="" for="fechaFin">Fecha final</label>
+						<input class="form-control" type="date" id="fechaFin" name="fechaFin" placeholder="yyyy-mm-dd" pattern="yyyy-mm-dd" required>
+					</div>
+					<input type="reset" class="btn btn-default" value="Limpiar Formulario">
+					<input type="submit" class="btn btn-primary" onclick="obtenerProductosVendidos()" value="Enviar">
+				</div>
+			</div>
+			<div id="graph" style="width: 100%; height: 500px; margin: 0 auto"></div>
+			<div id="table" class="table-responsive"></div>
+		</article>
+	</section>
+{% endblock %}

@@ -177,5 +177,5 @@ class UserController {
 		$sales = SaleDB::getInstance()->getSales($dni);
 		$view = new SaleslistView();
 		$view->show($sales);
-}
+	}
 }
