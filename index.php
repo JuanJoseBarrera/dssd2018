@@ -47,6 +47,7 @@ require_once './views/selectTypeView.php';
 require_once './views/soldProductsView.php';
 require_once './views/soldElectronicsView.php';
 require_once './views/productsEmployeesView.php';
+require_once './views/usedCouponsView.php';
 require_once './views/errorView.php';
 
 session_start();
@@ -123,6 +124,16 @@ try {
 		$fechaInicio = filter_input(INPUT_GET, "fechaInicio");
 		$fechaFin = filter_input(INPUT_GET, "fechaFin");
 		ManagerController::getInstance()->getProductsEmployees($fechaInicio, $fechaFin);
+	}
+
+	elseif (isset($_GET["action"]) && $_GET["action"] == 'cuponesUtilizados' && (ManagerController::getInstance()->getPermisos())) {
+		ManagerController::getInstance()->cuponesUtilizados();
+	}
+
+	elseif (isset($_GET["action"]) && $_GET["action"] == 'getUsedCoupons' && (ManagerController::getInstance()->getPermisos())) {
+		$fechaInicio = filter_input(INPUT_GET, "fechaInicio");
+		$fechaFin = filter_input(INPUT_GET, "fechaFin");
+		ManagerController::getInstance()->getUsedCoupons($fechaInicio, $fechaFin);
 	}
 
 	else {

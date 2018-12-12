@@ -159,3 +159,49 @@ function cargarGraficoProductosEmpleados(respuesta) {
 		}]
 	});
 }
+
+function obtenerCuponesUsados() {
+	var fechaInicio = $("#fechaInicio").val();
+	var fechaFin = $("#fechaFin").val();
+	$.ajax(
+		{
+			url: './index.php',
+			type: 'get',
+			async: true,
+			data: 'action=getUsedCoupons&fechaInicio='+ fechaInicio + '&fechaFin=' + fechaFin,
+			dataType: 'json',
+			success: cargarGraficoCupones
+		});
+}
+
+function cargarGraficoCupones(respuesta) {
+	var res = respuesta;
+	var arr = new Array();
+	var arr2 = new Array();
+	for (var i = 0; i < res.length; i++) {
+		arr.push(res[i].cantidad);
+		arr2.push(res[i].fecha);
+	}
+	$('#graph').highcharts({
+		chart: {
+			type: 'column'
+		},
+		title: {
+			text: 'Productos vendidos'
+		},
+		xAxis: {
+			categories: arr2
+		},
+		yAxis: {
+			title: {
+				text: 'Productos'
+			}
+		},
+		series: [{
+			name: 'Productos',
+			type: 'column',
+			data: arr
+			}
+			]
+	});
+}

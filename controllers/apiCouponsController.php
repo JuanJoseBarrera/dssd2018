@@ -35,7 +35,7 @@ $app->get('/coupon', function($request, $response, $args) {
 		}
 		return $response->withJson($co, 200);
 	} else {
-		return $response->withJson(array("No hay cupones cargados"));
+		return $response->withJson(array("message" => "No hay cupones cargados"));
 	}
 });
 
@@ -46,7 +46,7 @@ $app->get('/coupon/{number}', function($request, $response, $args) {
 	if ($coupon) {
 		return $response->withJson(object_encode($coupon), 200);
 	} else {
-		return $response->withJson(array("No existe un cupon con el numero ingresado"));
+		return $response->withJson(array("message" => "No existe un cupon con el numero ingresado"));
 	}
 });
 
@@ -60,7 +60,7 @@ $app->get ('/usedCoupon', function($request, $response, $args) {
 		}
 		return $response->withJson($co, 200);
 	} else {
-		return $response->withJson(array("No hay cupones cargados"));
+		return $response->withJson(array("message" => "No hay cupones cargados"));
 	}
 });
 
@@ -74,7 +74,7 @@ $app->get ('/notUsedCoupon', function($request, $response, $args) {
 		}
 		return $response->withJson($co, 200);
 	} else {
-		return $response->withJson(array("No hay cupones cargados"));
+		return $response->withJson(array("message" => "No hay cupones cargados"));
 	}
 });
 
@@ -89,7 +89,7 @@ $app->get('/couponsByDate/{date}', function($request, $response, $args) {
 		}
 		return $response->withJson($co, 200);
 	} else {
-		return $response->withJson(array("No hay cupones cargados"));
+		return $response->withJson(array("message" => "No hay cupones cargados"));
 	}
 });
 
@@ -100,7 +100,7 @@ $app->put('/coupon/{number}', function($request, $response, $args) {
 	if ($coupon) {
 		return $response->withJson(array("message" => "El cupon con numero $number fue utilizado con exito!!!"));
 	} else {
-		return $response->withJson(array("No se puede utilizar el cupon con el numero $number"));
+		return $response->withJson(array("message" => "No se puede utilizar el cupon con el numero $number"));
 	}
 });
 
@@ -126,9 +126,9 @@ $app->post('/coupon', function($request, $response, $args) {
 		$response->withHeader('Content-Type', 'text/plain');
 
 		if($result) {
-			$body->write("El cupon con numero $number fue ingresado con exito!!!");
+			$body->write("message" => "El cupon con numero $number fue ingresado con exito!!!");
 		}else {
-			$body->write("Ya existe un cupon con number $number");
+			$body->write("message" => "Ya existe un cupon con number $number");
 		}
 	} catch(\Exception $e) {
 		var_dump($e->getMessage());

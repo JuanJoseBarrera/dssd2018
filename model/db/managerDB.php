@@ -45,4 +45,14 @@ class ManagerDB extends ModelDB {
 		$answer = $this->queryList($query, [$fechaInicio, $fechaFin], $mapper);
 		return $answer;
 	}
+
+	public function getUsedCoupons($fechaInicio, $fechaFin) {
+		$mapper = function($row) {
+			$product = new Metric('id', 'idProduct', $row['cant'], $row['fechaCompra'], 'cupon', 'cantEmp', 'cantNoEmp');
+			return $product;
+		};
+		$query = "SELECT SUM(c.cantCuponesUsado) AS cant, c.fechaCompra FROM consultoria c WHERE (c.fechaCompra BETWEEN ? AND ?) GROUP BY c.fechaCompra";
+		$answer = $this->queryList($query, [$fechaInicio, $fechaFin], $mapper);
+		return $answer;
+	}
 }

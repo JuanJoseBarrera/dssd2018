@@ -37,7 +37,7 @@ $app->get('/employees', function ($request, $response, $args) {
 		}
 		return $response->withJson($emps, 200);
 	} else {
-		return $response->withJson(array("No hay empleados cargados"));
+		return $response->withJson(array("message" => "No hay empleados cargados"));
 	}
 });
 
@@ -66,7 +66,7 @@ $app->get('/employeesByType/{type}', function ($request, $response, $args) {
 		}
 		return $response->withJson($emps, 200);
 	} else {
-		return $response->withJson(array("No hay empleados cargados"));
+		return $response->withJson(array("message" => "No hay empleados cargados"));
 	}
 });
 
@@ -92,9 +92,9 @@ $app->post('/employees/{dni}/name/{name}/lastname/{lastname}/email/{email}/passw
 		$response->withHeader('Content-Type', 'text/plain');
 
 		if($result) {
-			$body->write("El empleado con documento $dni fue ingresado con exito!!!");
+			$body->write(array("message" => "El empleado con documento $dni fue ingresado con exito!!!"));
 		}else {
-			$body->write("Ya existe un empleado con documento $dni");
+			$body->write(array("message" => "Ya existe un empleado con documento $dni"));
 		}
 	} catch(\Exception $e) {
 		var_dump($e->getMessage());

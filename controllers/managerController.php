@@ -86,8 +86,6 @@ class ManagerController {
 		$result = array();
 		foreach ($products as $product) {
 			$metric = new Metric('id', 'idProduct', 'cantidad', 'fecha', 'cupon', 'cantEmp', 'cantNoEmp');
-			//$metric->setCantidad((int)$product->getCantidad());
-			//$metric->setFecha($product->getFecha());
 			$metric->setCantEmp((int)$product->getCantEmp());
 			$metric->setNoEmp((int)$product->getCantNoEmp());
 			$result[] = $metric;
@@ -96,4 +94,21 @@ class ManagerController {
 		echo(json_encode($result));
 	}
 
+	public function cuponesUtilizados($message=NULL) {
+		$view = new UsedCouponsView();
+		$view->show($message);
+	}
+
+	public function getUsedCoupons($fechaInicio, $fechaFin) {
+		$products = ManagerDB::getInstance()->getUsedCoupons($fechaInicio, $fechaFin);
+		$result = array();
+		foreach ($products as $product) {
+			$metric = new Metric('id', 'idProduct', 'cantidad', 'fecha', 'cupon', 'cantEmp', 'cantNoEmp');
+			$metric->setCantidad((int)$product->getCantidad());
+			$metric->setFecha($product->getFecha());
+			$result[] = $metric;
+		}
+		header('Content-type: application/json; charset=utf-8');
+		echo(json_encode($result));
+	}
 }

@@ -35,7 +35,7 @@ $app->get('/products', function ($request, $response, $args) {
 		}
 		return $response->withJson($prods, 200);
 	} else {
-		return $response->withJson(array("No hay productos cargados"));
+		return $response->withJson(array("message" => "No hay productos cargados"));
 	}
 });
 
@@ -48,7 +48,7 @@ $app->get('/products/{id}', function ($request, $response, $args) {
 	if (count($product > 0)) {
 		return $response->withJson(object_encode($product[0]), 200);
 	} else {
-		return $response->withJson(array("No existe un producto con el id ingresado"));
+		return $response->withJson(array("message" => "No existe un producto con el id ingresado"));
 	}
 });
 
@@ -65,7 +65,7 @@ $app->get('/productsByType/{type}', function ($request, $response, $args) {
 		}
 		return $response->withJson($prods, 200);
 	} else {
-		return $response->withJson(array("No hay productos para el tipo ingresado"));
+		return $response->withJson(array("message" => "No hay productos para el tipo ingresado"));
 	}
 });
 
@@ -79,7 +79,7 @@ $app->get('/productPrice/{id}', function ($request, $response, $args) {
 		$result= array('price'=>$product[0]->getCostPrice());
 		return $response->withJson($result, 200);
 	} else {
-		return $response->withJson(array("No existe un producto con el id ingresado"));
+		return $response->withJson(array("message" => "No existe un producto con el id ingresado"));
 	}
 });
 
@@ -93,7 +93,7 @@ $app->get('/productSalePrice/{id}', function ($request, $response, $args) {
 		$result = array('price'=>$product[0]->getSalePrice());
 		return $response->withJson($result, 200);
 	} else {
-		return $response->withJson(array("No existe un producto con el id ingresado"));
+		return $response->withJson(array("message" => "No existe un producto con el id ingresado"));
 	}
 });
 
