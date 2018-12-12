@@ -16,3 +16,14 @@ Desiciones
 	Y el campo fecha de emision del cupon.
 
 	Se creó la clase item que representa un producto en una compra.
+
+	$request = $client->request('GET', 'API/bpm/archivedCase?p=0&c=1000',
+			['headers' => [
+				'X-Bonita-API-Token' => $token->getValue()
+			]
+		]);
+echo $caseId;
+		$datos = $request->getBody();
+		echo $datos;
+		$response['success'] = true;
+		$datos = $response['data'] = json_decode($datos);
