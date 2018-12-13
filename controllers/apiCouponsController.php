@@ -126,9 +126,9 @@ $app->post('/coupon', function($request, $response, $args) {
 		$response->withHeader('Content-Type', 'text/plain');
 
 		if($result) {
-			$body->write("message" => "El cupon con numero $number fue ingresado con exito!!!");
+			$body->write(array("message" => "El cupon con numero $number fue ingresado con exito!!!"));
 		}else {
-			$body->write("message" => "Ya existe un cupon con number $number");
+			$body->write(array("message" => "Ya existe un cupon con number $number"));
 		}
 	} catch(\Exception $e) {
 		var_dump($e->getMessage());
